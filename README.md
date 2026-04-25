@@ -23,3 +23,27 @@ Just open `index.html` in your browser, or serve the folder:
 ```
 python3 -m http.server 8000
 ```
+## 📸 Screenshots
+
+### 🏠 Product Page
+![Product Page](./images/product-page.png)
+
+### 🛒 Cart & Checkout
+![Checkout Page](<img width="1778" height="868" alt="image" src="https://github.com/user-attachments/assets/0ea25fb0-e4df-4d54-8b22-8a36a26d1be8" />
+<img width="1685" height="835" alt="image" src="https://github.com/user-attachments/assets/5cf384f8-ca8b-4be1-a6b0-8eccff5356b4" />
+
+)
+## 📁 Project Structure
+project-folder/
+│
+├── index.html # Main product page
+├── checkout.html # Checkout page
+├── style.css # Styles (responsive)
+├── script.js # Cart, gallery, and logic
+│
+├── images/ # Product images & icons
+│ ├── product-1.png
+│ ├── thumbnail-1.png
+│ └── icons/
+│
+└── README.md
