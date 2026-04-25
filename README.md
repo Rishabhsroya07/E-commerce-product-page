@@ -2,14 +2,14 @@
 
 A simple static e-commerce site built with plain HTML, CSS, and JavaScript.
 
-## Files
+##  Files
 - `index.html` — Product page with image gallery, lightbox (click to open), quantity selector, and cart dropdown
 - `checkout.html` — Checkout form with validation and order summary
 - `style.css` — All styling (responsive)
 - `script.js` — Cart + gallery logic (state persisted via localStorage)
 - `images/` — Product photos, thumbnails, and SVG icons
 
-## Features
+## 🚀 Features
 - Click main image to open lightbox (desktop). Lightbox is NOT triggered by hover.
 - Click thumbnails to switch the large image
 - Add / remove items, edit quantity in cart
@@ -33,17 +33,3 @@ python3 -m http.server 8000
 <img width="1685" height="835" alt="image" src="https://github.com/user-attachments/assets/5cf384f8-ca8b-4be1-a6b0-8eccff5356b4" />
 
 )
-## 📁 Project Structure
-project-folder/
-│
-├── index.html # Main product page
-├── checkout.html # Checkout page
-├── style.css # Styles (responsive)
-├── script.js # Cart, gallery, and logic
-│
-├── images/ # Product images & icons
-│ ├── product-1.png
-│ ├── thumbnail-1.png
-│ └── icons/
-│
-└── README.md
