@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Checkout — Sneakers</title>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+<style>
+.checkout-wrap{max-width:1110px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1.5fr 1fr;gap:48px}
+@media(max-width:768px){.checkout-wrap{grid-template-columns:1fr;padding:24px}}
+.checkout-wrap h1{font-size:32px;margin-bottom:24px}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:700;font-size:13px;margin-bottom:6px;color:var(--very-dark-blue)}
+.field input,.field select{width:100%;padding:14px;border:1px solid var(--grayish-blue);border-radius:8px;font-family:inherit;font-size:15px}
+.field input:focus,.field select:focus{outline:none;border-color:var(--orange)}
+.field.error input{border-color:#d33}
+.error-msg{color:#d33;font-size:12px;margin-top:4px;display:none}
+.field.error .error-msg{display:block}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.section-title{font-weight:700;margin:24px 0 12px;text-transform:uppercase;font-size:13px;letter-spacing:1px;color:var(--orange)}
+.pay-options{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:520px){.pay-options{grid-template-columns:1fr}}
+.pay-opt{display:flex;align-items:center;gap:10px;padding:14px;border:1px solid var(--grayish-blue);border-radius:8px;cursor:pointer;font-weight:700;font-size:14px}
+.pay-opt input{accent-color:var(--orange);width:18px;height:18px}
+.pay-opt.active{border-color:var(--orange);background:#fff7f0}
+.cod-note{background:#fff7f0;border:1px dashed var(--orange);border-radius:8px;padding:14px;color:var(--dark-grayish-blue);font-size:14px}
+.summary{background:var(--light-grayish-blue);border-radius:10px;padding:24px;height:fit-content;position:sticky;top:24px}
+.summary h2{font-size:18px;margin-bottom:16px}
+.sum-item{display:flex;justify-content:space-between;padding:8px 0;color:var(--dark-grayish-blue)}
+.sum-total{display:flex;justify-content:space-between;padding-top:16px;border-top:1px solid #e4e9f2;font-weight:700;font-size:18px;color:var(--very-dark-blue)}
+.place-order{margin-top:24px;width:100%;background:var(--orange);color:#fff;font-weight:700;border-radius:10px;padding:18px;font-size:15px;border:none;cursor:pointer}
+.place-order:hover{background:#ffab6a}
+.place-order:disabled{opacity:.5;cursor:not-allowed}
+.modal[hidden]{display:none !important}
+.modal{position:fixed;inset:0;background:var(--black-75);display:flex;align-items:center;justify-content:center;z-index:200}
+.modal-box{background:#fff;border-radius:12px;padding:40px;max-width:420px;text-align:center}
+.modal-box h2{margin-bottom:12px}
+.modal-box p{color:var(--dark-grayish-blue);margin-bottom:20px}
+.modal-box a{display:inline-block;background:var(--orange);color:#fff;padding:14px 24px;border-radius:8px;font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="header-left">
+      <a href="index.html" class="logo">sneakers</a>
+    </div>
+    <div class="header-right">
+      <a href="index.html" style="font-weight:700;color:var(--orange)">← Continue shopping</a>
+    </div>
+  </div>
+</header>
+
+<main class="checkout-wrap">
+  <form id="coForm" novalidate>
+    <h1>Checkout</h1>
+    <div class="section-title">Billing details</div>
+    <div class="row">
+      <div class="field"><label>First name</label><input name="firstName" required><span class="error-msg">Required</span></div>
+      <div class="field"><label>Last name</label><input name="lastName" required><span class="error-msg">Required</span></div>
+    </div>
+    <div class="field"><label>Email</label><input type="email" name="email" required><span class="error-msg">Valid email required</span></div>
+    <div class="field"><label>Phone</label><input type="tel" name="phone" required><span class="error-msg">Required</span></div>
+
+    <div class="section-title">Shipping</div>
+    <div class="field"><label>Address</label><input name="address" required><span class="error-msg">Required</span></div>
+    <div class="row">
+      <div class="field"><label>City</label><input name="city" required><span class="error-msg">Required</span></div>
+      <div class="field"><label>ZIP / Postal code</label><input name="zip" required><span class="error-msg">Required</span></div>
+    </div>
+    <div class="field"><label>Country</label><input name="country" required><span class="error-msg">Required</span></div>
+
+    <div class="section-title">Payment method</div>
+    <div class="pay-options">
+      <label class="pay-opt active" id="optOnline">
+        <input type="radio" name="payMethod" value="online" checked>
+        <span>Online Payment</span>
+      </label>
+      <label class="pay-opt" id="optCod">
+        <input type="radio" name="payMethod" value="cod">
+        <span>Cash on Delivery</span>
+      </label>
+    </div>
+
+    <div id="cardFields">
+      <div class="field"><label>Card number</label><input name="card" maxlength="19" placeholder="1234 5678 9012 3456"><span class="error-msg">16 digits required</span></div>
+      <div class="row">
+        <div class="field"><label>Expiry (MM/YY)</label><input name="expiry" placeholder="MM/YY"><span class="error-msg">Format MM/YY</span></div>
+        <div class="field"><label>CVV</label><input name="cvv" maxlength="4" placeholder="123"><span class="error-msg">3-4 digits</span></div>
+      </div>
+    </div>
+
+    <div id="codNote" class="cod-note" hidden>
+      You'll pay in cash when your order is delivered. No card details required.
+    </div>
+
+    <button class="place-order" type="submit">Place order</button>
+  </form>
+
+  <aside class="summary">
+    <h2>Order summary</h2>
+    <div id="sumItems"></div>
+    <div class="sum-item"><span>Subtotal</span><span id="sumSubtotal">$0.00</span></div>
+    <div class="sum-item"><span>Shipping</span><span id="sumShipping">$0.00</span></div>
+    <div class="sum-item"><span>VAT (20%)</span><span id="sumVat">$0.00</span></div>
+    <div class="sum-total"><span>Total</span><span id="sumTotal">$0.00</span></div>
+  </aside>
+</main>
+
+<div class="modal" id="confirmModal" hidden>
+  <div class="modal-box">
+    <h2>🎉 Order confirmed</h2>
+    <p id="confirmMsg">Thank you! Your order has been placed successfully.</p>
+    <a href="index.html">Back to shop</a>
+  </div>
+</div>
+
+<script>
+const SHIPPING = 50;
+const VAT_RATE = 0.20;
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+function getCart(){ try{return JSON.parse(localStorage.getItem('cart'))||[]}catch{return[]} }
+
+function renderSummary(){
+  const cart = getCart();
+  const itemsBox = $('#sumItems');
+  itemsBox.innerHTML = cart.map(i => `<div class="sum-item"><span>${i.name} × ${i.qty}</span><span>$${(i.price*i.qty).toFixed(2)}</span></div>`).join('') || '<p style="color:var(--dark-grayish-blue);margin-bottom:12px">No items in cart.</p>';
+  const sub = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const ship = cart.length ? SHIPPING : 0;
+  const vat = sub * VAT_RATE;
+  $('#sumSubtotal').textContent = '$'+sub.toFixed(2);
+  $('#sumShipping').textContent = '$'+ship.toFixed(2);
+  $('#sumVat').textContent = '$'+vat.toFixed(2);
+  $('#sumTotal').textContent = '$'+(sub+ship+vat).toFixed(2);
+}
+renderSummary();
+
+function getPayMethod(){
+  const r = document.querySelector('input[name="payMethod"]:checked');
+  return r ? r.value : 'online';
+}
+
+function updatePayUI(){
+  const m = getPayMethod();
+  $('#optOnline').classList.toggle('active', m==='online');
+  $('#optCod').classList.toggle('active', m==='cod');
+  $('#cardFields').hidden = m==='cod';
+  $('#codNote').hidden = m!=='cod';
+}
+$$('input[name="payMethod"]').forEach(r => r.addEventListener('change', updatePayUI));
+updatePayUI();
+
+function validate(form){
+  let ok = true;
+  const method = getPayMethod();
+  $$('.field', form).forEach(f => f.classList.remove('error'));
+
+  // Always-required fields
+  ['firstName','lastName','email','phone','address','city','zip','country'].forEach(name => {
+    const inp = form.querySelector(`[name="${name}"]`);
+    if (!inp) return;
+    let v = inp.value.trim(), bad = !v;
+    if (name==='email' && v && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) bad=true;
+    if (bad){ inp.closest('.field').classList.add('error'); ok=false; }
+  });
+
+  // Card fields only when online payment
+  if (method === 'online'){
+    ['card','expiry','cvv'].forEach(name => {
+      const inp = form.querySelector(`[name="${name}"]`);
+      if (!inp) return;
+      let v = inp.value.trim(), bad = !v;
+      if (name==='card' && v && v.replace(/\s/g,'').length<16) bad=true;
+      if (name==='expiry' && v && !/^\d{2}\/\d{2}$/.test(v)) bad=true;
+      if (name==='cvv' && v && !/^\d{3,4}$/.test(v)) bad=true;
+      if (bad){ inp.closest('.field').classList.add('error'); ok=false; }
+    });
+  }
+  return ok;
+}
+
+$('#coForm').addEventListener('submit', e => {
+  e.preventDefault();
+  if (getCart().length === 0){ alert('Your cart is empty.'); return; }
+  if (!validate(e.target)) return;
+  const method = getPayMethod();
+  $('#confirmMsg').textContent = method === 'cod'
+    ? 'Thank you! Your order is placed. Please keep cash ready at delivery.'
+    : 'Thank you! Your payment was successful and your order has been placed.';
+  localStorage.removeItem('cart');
+  $('#confirmModal').hidden = false;
+});
+</script>
+</body>
+</html>
