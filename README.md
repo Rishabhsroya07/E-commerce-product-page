@@ -26,7 +26,8 @@ python3 -m http.server 8000
 ## 📸 Screenshots
 
 ### 🏠 Product Page
-![Product Page](./images/product-page.png)
+![Product Page](<img width="1310" height="826" alt="image" src="https://github.com/user-attachments/assets/e9eac1e9-37a9-42b4-92ba-d2f0f8a4fb23" />
+)
 
 ### 🛒 Cart & Checkout
 ![Checkout Page](<img width="1778" height="868" alt="image" src="https://github.com/user-attachments/assets/0ea25fb0-e4df-4d54-8b22-8a36a26d1be8" />
